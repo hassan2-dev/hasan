@@ -149,23 +149,31 @@ function Work() {
                         const isFeatured = project.featured;
                         const isAlmas = project.title === "Almas.com.iq";
 
+                        // Navigate to demo link if available, otherwise do nothing
+                        const handleProjectClick = () => {
+                            if (project.demo) {
+                                window.open(project.demo, '_blank', 'noopener,noreferrer');
+                            }
+                        };
+
                         return (
                             <div
                                 key={index}
-                                className="group rounded-2xl overflow-hidden transition-all duration-500 hover:z-10 hover:scale-105"
+                                className="group rounded-2xl overflow-hidden transition-all duration-500 hover:z-10 hover:scale-105 cursor-pointer"
                                 style={{
                                     transform: `rotate(${Math.random() * 2 - 1}deg)`,
                                     boxShadow: isAlmas
                                         ? '0 10px 40px rgba(139, 92, 246, 0.3)'
                                         : (isFeatured ? '0 10px 30px rgba(59, 130, 246, 0.2)' : '0 10px 20px rgba(30, 41, 59, 0.2)')
                                 }}
+                                onClick={handleProjectClick}
                             >
                                 {/* Card Background with gradient */}
                                 <div className={`absolute inset-0 ${isAlmas
-                                        ? 'bg-gradient-to-br from-purple-800/90 via-indigo-900/90 to-zinc-900/95'
-                                        : isFeatured
-                                            ? 'bg-gradient-to-br from-blue-800/80 via-indigo-900/80 to-zinc-900/90'
-                                            : 'bg-gradient-to-br from-zinc-800/80 via-zinc-850/80 to-zinc-900/90'
+                                    ? 'bg-gradient-to-br from-purple-800/90 via-indigo-900/90 to-zinc-900/95'
+                                    : isFeatured
+                                        ? 'bg-gradient-to-br from-blue-800/80 via-indigo-900/80 to-zinc-900/90'
+                                        : 'bg-gradient-to-br from-zinc-800/80 via-zinc-850/80 to-zinc-900/90'
                                     } backdrop-blur-md border ${isAlmas ? 'border-purple-500/40' : (isFeatured ? 'border-blue-500/30' : 'border-zinc-700/50')
                                     } group-hover:border-purple-500/30 transition-all duration-300`}>
                                 </div>
@@ -198,7 +206,7 @@ function Work() {
                                     </div>
 
                                     {/* Project info overlay - visible on hover */}
-                                    <div className="absolute inset-0 flex flex-col p-6 opacity-0 group-hover:opacity-100 transition-all duration-300 overflow-auto">
+                                    <div className="absolute inset-0 flex flex-col p-6 opacity-0 group-hover:opacity-100 transition-all duration-300 overflow-auto sm:pointer-events-auto pointer-events-none">
                                         <h3 className={`font-bold mb-2 ${isAlmas ? 'text-xl' : (isFeatured ? 'text-lg' : 'text-base')
                                             } text-white`}>{project.title}</h3>
                                         <p className={`text-gray-300 mb-4 leading-relaxed ${isAlmas ? 'text-base' : (isFeatured ? 'text-sm' : 'text-xs')
@@ -227,6 +235,7 @@ function Work() {
                                                     rel="noopener noreferrer"
                                                     className={`text-purple-300 hover:text-purple-200 transition-colors flex items-center gap-1.5 ${isAlmas ? 'text-sm' : (isFeatured ? 'text-xs' : 'text-[10px]')
                                                         }`}
+                                                    onClick={(e) => e.stopPropagation()} // Prevent triggering the parent click
                                                 >
                                                     <svg xmlns="http://www.w3.org/2000/svg" className={
                                                         isAlmas ? "h-5 w-5" : (isFeatured ? "h-4 w-4" : "h-3.5 w-3.5")
@@ -243,6 +252,7 @@ function Work() {
                                                     rel="noopener noreferrer"
                                                     className={`text-blue-300 hover:text-blue-200 transition-colors flex items-center gap-1.5 ${isAlmas ? 'text-sm' : (isFeatured ? 'text-xs' : 'text-[10px]')
                                                         }`}
+                                                    onClick={(e) => e.stopPropagation()} // Prevent triggering the parent click
                                                 >
                                                     <svg xmlns="http://www.w3.org/2000/svg" className={
                                                         isAlmas ? "h-5 w-5" : (isFeatured ? "h-4 w-4" : "h-3.5 w-3.5")
@@ -252,6 +262,11 @@ function Work() {
                                                     View Live
                                                 </a>
                                             )}
+                                        </div>
+
+                                        {/* Mobile View Link Indicator */}
+                                        <div className="block sm:hidden text-blue-300 text-xs mt-4 text-center">
+                                            {project.demo && "Tap to view site"}
                                         </div>
 
                                         {/* Project badges */}

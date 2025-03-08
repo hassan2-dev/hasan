@@ -6,7 +6,7 @@ function Hero() {
         <div className="text-center min-h-screen flex flex-col justify-center relative">
             <div>
                 <h1 className="text-5xl md:text-7xl font-bold mb-4">
-                    Hi, my name is <span className="text-purple-500">Hasan</span>
+                    Hi, my name is <span className="text-purple-500">Hassan</span>
                 </h1>
                 <h2 className="text-3xl md:text-5xl mb-8">
                     I'm a{' '}
