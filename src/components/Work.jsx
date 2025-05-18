@@ -31,7 +31,7 @@ const PortfolioOverview = () => {
       image: "/api/placeholder/150/80",
       technologies: ["React", "Node.js", "Express", "MongoDB", "Dashboard"],
       demo: "https://aktco.com.iq/",
-      adminDemo: "https://dashboard.aktco.com.iq/",
+      // adminDemo: "https://dashboard.aktco.com.iq/",
       type: "web",
       featured: true,
       priority: 2
@@ -62,7 +62,7 @@ const PortfolioOverview = () => {
       image: "/api/placeholder/150/80",
       technologies: ["React", "Node.js", "MongoDB", "Admin Dashboard"],
       demo: "https://sanabel-aldiwan.iq/",
-      adminDemo: "https://panel.sanabel-aldiwan.iq/",
+      // adminDemo: "https://panel.sanabel-aldiwan.iq/",
       type: "web",
       featured: true,
       priority: 3
@@ -248,19 +248,7 @@ const PortfolioOverview = () => {
                       View Live
                     </a>
                   )}
-                  {project.adminDemo && (
-                    <a 
-                      href={project.adminDemo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded text-sm"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-                      </svg>
-                      Admin Panel
-                    </a>
-                  )}
+              
                 </div>
               </div>
             </div>
