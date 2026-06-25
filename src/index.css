@@ -1,1 +1,125 @@
 @import "tailwindcss";
+
+html, body, #root {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #05050a;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-inner {
+  animation: marquee-scroll 35s linear infinite;
+}
+
+.marquee-inner:hover {
+  animation-play-state: paused;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.25); border-radius: 2px; }
+
+.glass-card {
+  background: rgba(255,255,255,0.025);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(139,92,246,0.28);
+  box-shadow: 0 0 28px rgba(139,92,246,0.08);
+}
+
+.violet-btn-glow:hover {
+  box-shadow: 0 0 32px rgba(139,92,246,0.4);
+}
+
+.timeline-dot {
+  box-shadow: 0 0 10px rgba(139,92,246,0.7);
+}
+
+.font-mono-brand {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+@keyframes scroll-wheel {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(8px); }
+}
+
+.scroll-mouse {
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgba(139, 92, 246, 0.45);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.group:hover .scroll-mouse {
+  border-color: rgba(167, 139, 250, 0.75);
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.25);
+}
+
+.scroll-mouse-wheel {
+  width: 4px;
+  height: 8px;
+  border-radius: 999px;
+  background: #a78bfa;
+  animation: scroll-wheel 1.6s ease-in-out infinite;
+}
+
+@media (pointer: fine) {
+  body.custom-cursor-active,
+  body.custom-cursor-active a,
+  body.custom-cursor-active button,
+  body.custom-cursor-active input,
+  body.custom-cursor-active textarea,
+  body.custom-cursor-active select,
+  body.custom-cursor-active label {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor-dot,
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+}
+
+.custom-cursor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c4b5fd;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.9);
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.custom-cursor-ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(167, 139, 250, 0.55);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}

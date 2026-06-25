@@ -1,108 +1,107 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { personal } from '../data/portfolio'
 
 function Navbar({ activeSection, setActiveSection }) {
-    const navItems = ['Start', 'Work', 'About', 'Contact']
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const navItems = [
+    { id: 'start', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'work', label: 'Platforms' },
+    { id: 'systems', label: 'Systems' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'contact', label: 'Contact' },
+  ]
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-    const handleNavClick = (section) => {
-        setActiveSection(section)
-        setIsMenuOpen(false)
-    }
+  const handleNavClick = (section) => {
+    setActiveSection(section)
+    setIsMenuOpen(false)
+  }
 
-    return (
-        <nav className="fixed top-0 left-0 w-full z-50 bg-black/85 backdrop-blur-md border-b border-purple-900/30 shadow-lg">
-            <div className="container mx-auto px-6">
-                <div className="flex items-center justify-between h-20">
-                    <div className="relative group">
-                        <h1 className="text-4xl font-sans font-black tracking-tight">
-                            <span className="relative z-10 font-mono">
-                                <span className="text-purple-400">&lt;</span>
-                                <span className="text-white">H</span>
-                                <span className="text-purple-400">a</span>
-                                <span className="text-pink-500">s</span>
-                                <span className="text-purple-400">s</span>
-                                <span className="text-indigo-400">a</span>
-                                <span className="text-white">n</span>
-                                <span className="text-purple-400">/&gt;</span>
-                            </span>
-                        </h1>
-                        <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300 rounded-full"></div>
-                    </div>
+  return (
+    <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          <a
+            href="#start"
+            onClick={() => handleNavClick('start')}
+            className="text-lg md:text-xl font-bold text-white"
+          >
+            <span className="text-violet-400">H</span>
+            {personal.name.split(' ')[1]}
+          </a>
 
-                    {/* Desktop Navigation */}
-                    <ul className="hidden md:flex items-center">
-                        {navItems.map((item, index) => (
-                            <React.Fragment key={item}>
-                                <li>
-                                    <a
-                                        href={`#${item.toLowerCase()}`}
-                                        className={`relative px-2 py-1 text-lg font-mono transition-all duration-300 hover:text-purple-400
-                                            ${activeSection === item.toLowerCase()
-                                                ? 'text-purple-400 font-semibold'
-                                                : 'text-white/90 hover:scale-105'
-                                            }`}
-                                        onClick={() => handleNavClick(item.toLowerCase())}
-                                    >
-                                        {activeSection === item.toLowerCase() && (
-                                            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></span>
-                                        )}
-                                        {item}
-                                    </a>
-                                </li>
-                                {index < navItems.length - 1 && (
-                                    <span className="text-purple-600/70 mx-4 font-light">→</span>
-                                )}
-                            </React.Fragment>
-                        ))}
-                    </ul>
+          <ul className="hidden lg:flex items-center gap-1">
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  onClick={() => handleNavClick(item.id)}
+                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+                    activeSection === item.id
+                      ? 'text-violet-400 bg-violet-500/10'
+                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            <li className="ml-2">
+              <a
+                href={personal.cvUrl}
+                download
+                className="px-4 py-2 text-sm font-medium text-white bg-violet-600 hover:bg-violet-500 rounded-lg transition-colors"
+              >
+                CV
+              </a>
+            </li>
+          </ul>
 
-                    {/* Mobile Hamburger Button */}
-                    <div className="md:hidden">
-                        <button
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="flex items-center p-2 rounded-md text-white focus:outline-none"
-                        >
-                            <svg
-                                className="w-6 h-6"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                {isMenuOpen ? (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                ) : (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                )}
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden p-2 text-gray-400 hover:text-white"
+            aria-label="Toggle menu"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
 
-            {/* Mobile Menu */}
-            {isMenuOpen && (
-                <div className="md:hidden bg-black/95 backdrop-blur-md border-t border-purple-900/30">
-                    <div className="px-4 py-3 space-y-2">
-                        {navItems.map((item) => (
-                            <a
-                                key={item}
-                                href={`#${item.toLowerCase()}`}
-                                className={`block px-3 py-2 rounded-md text-base font-mono transition-all duration-300
-                                    ${activeSection === item.toLowerCase()
-                                        ? 'text-purple-400 font-semibold bg-purple-900/20'
-                                        : 'text-white/90 hover:text-purple-400 hover:bg-purple-900/10'
-                                    }`}
-                                onClick={() => handleNavClick(item.toLowerCase())}
-                            >
-                                {item}
-                            </a>
-                        ))}
-                    </div>
-                </div>
-            )}
-        </nav>
-    )
+      {isMenuOpen && (
+        <div className="lg:hidden bg-black/95 backdrop-blur-xl border-t border-white/5">
+          <div className="px-4 py-4 space-y-1">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={() => handleNavClick(item.id)}
+                className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                  activeSection === item.id
+                    ? 'text-violet-400 bg-violet-500/10'
+                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              href={personal.cvUrl}
+              download
+              className="block px-4 py-3 text-sm font-medium text-violet-400"
+            >
+              Download CV
+            </a>
+          </div>
+        </div>
+      )}
+    </nav>
+  )
 }
 
-export default Navbar 
+export default Navbar
