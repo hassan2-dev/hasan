@@ -10,74 +10,116 @@ import {
   technologies,
   testimonials,
 } from '../data/portfolio'
+import { getTranslations } from '../i18n/content'
+import {
+  platformsAr,
+  additionalProjectsAr,
+  capabilityItemsAr,
+  categoryLabelsAr,
+} from '../i18n/portfolioAr'
 
-export const NAV_LINKS = ['About', 'Experience', 'Platforms', 'Stack', 'Contact']
+function translatePeriod(period, presentLabel) {
+  return period.replace(/\bPresent\b/g, presentLabel)
+}
 
-export { personal }
+export function buildPortfolioData(lang = 'en') {
+  const t = getTranslations(lang)
+  const isAr = lang === 'ar'
 
-export const ROLES = personal.titles
+  return {
+    personal: {
+      ...personal,
+      location: t.location,
+      cvUrl: '/Hassan adnan.pdf',
+    },
+    NAV_LINKS: t.nav,
+    ROLES: t.roles,
+    HERO_STATS: achievements.slice(0, 4).map((a, i) => ({
+      value: a.value,
+      label: t.achievements[i] || a.label,
+    })),
+    ABOUT_HIGHLIGHTS: aboutHighlights.map((item, i) => ({
+      ...item,
+      label: t.highlights[i] || item.label,
+    })),
+    TIMELINE: experience.map((item, i) => ({
+      period: translatePeriod(item.period, t.experience.present),
+      role: isAr ? t.experience.roles[i] : item.role,
+      company: item.company,
+      location: t.location,
+      desc: t.experience.items[i] || item.description,
+      tags: [isAr ? t.experience.roles[i] : item.role, item.company],
+    })),
+    PLATFORMS: enterprisePlatforms.map((p, i) => {
+      const ar = isAr ? platformsAr[p.id] : null
+      return {
+        num: String(i + 1).padStart(2, '0'),
+        name: p.title,
+        full: ar?.subtitle ?? p.subtitle,
+        featured: p.featured,
+        role: ar?.role ?? p.role,
+        description: ar?.description ?? p.description,
+        contributions: ar?.contributions ?? p.contributions,
+        features: ar?.features ?? p.features,
+        tech: p.technologies,
+        url: p.url || p.links?.[0]?.url,
+      }
+    }),
+    ADD_PROJECTS: additionalProjects.map((p, i) => {
+      const ar = isAr ? additionalProjectsAr[i] : null
+      return {
+        name: p.title,
+        description: ar?.subtitle ?? p.subtitle,
+        tech: ar?.features ?? p.features,
+        url: p.url,
+        category: isAr ? (categoryLabelsAr[p.category] ?? p.category) : p.category,
+      }
+    }),
+    CAPABILITIES: systemCapabilities.map((c, i) => ({
+      ...c,
+      title: t.capabilities.titles[i] || c.title,
+      items: isAr ? capabilityItemsAr[i] : c.items,
+    })),
+    TECH_STACK: skillCategories.map((s, i) => ({
+      category: t.stack.categories[i] || s.title,
+      items: s.skills,
+    })),
+    ACHIEVEMENTS_DISPLAY: [
+      { value: achievements[0].value, label: t.achievements[0], sub: t.impact.subs[0] },
+      { value: achievements[1].value, label: t.achievements[1], sub: t.impact.subs[1] },
+      { value: achievements[3].value, label: t.achievements[2], sub: t.impact.subs[2] },
+      { value: achievements[4].value, label: t.achievements[3], sub: t.impact.subs[3] },
+    ],
+    TECH_MARQUEE: technologies,
+    TESTIMONIALS_DISPLAY: testimonials.map((item, i) => ({
+      quote: t.testimonials.items[i]?.quote || item.quote,
+      name: t.testimonials.items[i]?.author || item.author,
+      role: t.testimonials.items[i]?.role || item.role,
+      initials: (t.testimonials.items[i]?.author || item.author)
+        .split(' ')
+        .map((w) => w[0])
+        .join('')
+        .slice(0, 2)
+        .toUpperCase(),
+    })),
+  }
+}
 
-export const HERO_STATS = achievements.slice(0, 4).map((a) => ({
-  value: a.value,
-  label: a.label,
-}))
-
-export const ABOUT_HIGHLIGHTS = aboutHighlights
-
-export const TIMELINE = experience.map((item) => ({
-  period: item.period,
-  role: item.role,
-  company: item.company,
-  location: personal.location,
-  desc: item.description,
-  tags: [item.role.split(' ')[0], item.company],
-}))
-
-export const PLATFORMS = enterprisePlatforms.map((p, i) => ({
-  num: String(i + 1).padStart(2, '0'),
-  name: p.title,
-  full: p.subtitle,
-  featured: p.featured,
-  role: p.role,
-  description: p.description,
-  contributions: p.contributions,
-  features: p.features,
-  tech: p.technologies,
-  url: p.url || p.links?.[0]?.url,
-}))
-
-export const ADD_PROJECTS = additionalProjects.map((p) => ({
-  name: p.title,
-  description: p.subtitle,
-  tech: p.features,
-  url: p.url,
-  category: p.category,
-}))
-
-export const CAPABILITIES = systemCapabilities
-
-export const TECH_STACK = skillCategories.map((s) => ({
-  category: s.title,
-  items: s.skills,
-}))
-
-export const ACHIEVEMENTS_DISPLAY = [
-  { value: achievements[0].value, label: achievements[0].label, sub: 'live in production' },
-  { value: achievements[1].value, label: achievements[1].label, sub: 'shipped end-to-end' },
-  { value: achievements[3].value, label: achievements[3].label, sub: 'REST & integrations' },
-  { value: achievements[4].value, label: achievements[4].label, sub: 'software engineering' },
-]
-
-export const TECH_MARQUEE = technologies
-
-export const TESTIMONIALS_DISPLAY = testimonials.map((t) => ({
-  quote: t.quote,
-  name: t.author,
-  role: t.role,
-  initials: t.author
-    .split(' ')
-    .map((w) => w[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase(),
-}))
+// Legacy exports for any old components
+const defaultData = buildPortfolioData('en')
+export const {
+  personal: legacyPersonal,
+  NAV_LINKS,
+  ROLES,
+  HERO_STATS,
+  ABOUT_HIGHLIGHTS,
+  TIMELINE,
+  PLATFORMS,
+  ADD_PROJECTS,
+  CAPABILITIES,
+  TECH_STACK,
+  ACHIEVEMENTS_DISPLAY,
+  TECH_MARQUEE,
+  TESTIMONIALS_DISPLAY,
+} = defaultData
+export { legacyPersonal as personal }

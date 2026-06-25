@@ -1,20 +1,27 @@
 import { useEffect, useState } from 'react'
-import { ROLES } from '../lib/mapPortfolio'
+import { useApp } from '../context/AppContext'
 
 function AnimatedRole() {
+  const { data } = useApp()
+  const roles = data.ROLES
   const [idx, setIdx] = useState(0)
   const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    setIdx(0)
+    setVisible(true)
+  }, [roles])
 
   useEffect(() => {
     const t = setInterval(() => {
       setVisible(false)
       setTimeout(() => {
-        setIdx((i) => (i + 1) % ROLES.length)
+        setIdx((i) => (i + 1) % roles.length)
         setVisible(true)
       }, 380)
     }, 2800)
     return () => clearInterval(t)
-  }, [])
+  }, [roles.length])
 
   return (
     <span
@@ -24,7 +31,7 @@ function AnimatedRole() {
         transform: visible ? 'translateY(0px)' : 'translateY(10px)',
       }}
     >
-      {ROLES[idx]}
+      {roles[idx]}
     </span>
   )
 }

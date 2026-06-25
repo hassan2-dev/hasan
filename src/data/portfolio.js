@@ -1,5 +1,5 @@
 export const personal = {
-  name: 'Hassan Adnan',
+  name: 'Hasan Adnan',
   titles: [
     'Chief Technology Officer',
     'Backend Engineer',
@@ -12,7 +12,7 @@ export const personal = {
   github: 'https://github.com/hassan2-dev',
   whatsapp: 'https://wa.me/9647803538208',
   phone: '+9647803538208',
-  cvUrl: '/public/Hassan adnan.pdf',
+  cvUrl: '/Hassan adnan.pdf',
 }
 
 export const aboutHighlights = [

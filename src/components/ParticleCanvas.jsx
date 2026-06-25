@@ -1,7 +1,12 @@
 import { useEffect, useRef, memo } from 'react'
 
-const ParticleCanvas = memo(function ParticleCanvas() {
+const ParticleCanvas = memo(function ParticleCanvas({ theme = 'dark' }) {
   const ref = useRef(null)
+  const themeRef = useRef(theme)
+
+  useEffect(() => {
+    themeRef.current = theme
+  }, [theme])
 
   useEffect(() => {
     const canvas = ref.current
@@ -11,6 +16,14 @@ const ParticleCanvas = memo(function ParticleCanvas() {
 
     let raf
     const pts = []
+
+    function colors() {
+      const light = themeRef.current === 'light'
+      return {
+        dot: light ? 'rgba(124,58,237,0.28)' : 'rgba(139,92,246,0.55)',
+        lineBase: light ? 0.07 : 0.13,
+      }
+    }
 
     function setup() {
       const dpr = window.devicePixelRatio || 1
@@ -32,6 +45,7 @@ const ParticleCanvas = memo(function ParticleCanvas() {
     }
 
     function tick() {
+      const { dot, lineBase } = colors()
       const w = canvas.offsetWidth
       const h = canvas.offsetHeight
       ctx.clearRect(0, 0, w, h)
@@ -43,7 +57,7 @@ const ParticleCanvas = memo(function ParticleCanvas() {
         if (p.y < 0 || p.y > h) p.vy *= -1
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(139,92,246,0.55)'
+        ctx.fillStyle = dot
         ctx.fill()
       }
 
@@ -56,7 +70,7 @@ const ParticleCanvas = memo(function ParticleCanvas() {
             ctx.beginPath()
             ctx.moveTo(pts[i].x, pts[i].y)
             ctx.lineTo(pts[j].x, pts[j].y)
-            ctx.strokeStyle = `rgba(139,92,246,${0.13 * (1 - d / 130)})`
+            ctx.strokeStyle = `rgba(139,92,246,${lineBase * (1 - d / 130)})`
             ctx.lineWidth = 0.6
             ctx.stroke()
           }
@@ -76,7 +90,7 @@ const ParticleCanvas = memo(function ParticleCanvas() {
     }
   }, [])
 
-  return <canvas ref={ref} className="absolute inset-0 w-full h-full" />
+  return <canvas ref={ref} className="absolute inset-0 w-full h-full pointer-events-none" />
 })
 
 export default ParticleCanvas
