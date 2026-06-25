@@ -1,0 +1,36 @@
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+
+[[headers]]
+  for = "/index.md"
+  [headers.values]
+    Content-Type = "text/markdown; charset=utf-8"
+
+[[headers]]
+  for = "/auth.md"
+  [headers.values]
+    Content-Type = "text/markdown; charset=utf-8"
+
+[[headers]]
+  for = "/.well-known/api-catalog"
+  [headers.values]
+    Content-Type = "application/linkset+json; charset=utf-8"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Link = '</.well-known/api-catalog>; rel="api-catalog", </.well-known/agent-skills/index.json>; rel="describedby", </index.md>; rel="alternate"; type="text/markdown"'
+
+[[redirects]]
+  from = "/"
+  to = "/index.md"
+  status = 200
+  force = false
+  conditions = {Accept = ["text/markdown"]}

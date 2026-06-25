@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agentskills.io/schemas/discovery/v0.2.0",
+  "skills": [
+    {
+      "name": "portfolio-contact",
+      "type": "skill",
+      "description": "Public contact information and CV links for Hassan Adnan portfolio.",
+      "url": "https://hasan-snowy.vercel.app/.well-known/agent-skills/portfolio-contact/SKILL.md",
+      "sha256": "2511c696fbf70c27c059223871eaa783c65c53e0bc0b0a867629721d3684efce"
+    }
+  ]
+}

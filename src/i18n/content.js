@@ -1,5 +1,6 @@
 export const translations = {
   en: {
+    name: 'Hassan Adnan',
     nav: [
       { id: 'about', label: 'About' },
       { id: 'experience', label: 'Experience' },
@@ -156,6 +157,7 @@ export const translations = {
   },
 
   ar: {
+    name: 'حسن عدنان',
     nav: [
       { id: 'about', label: 'عني' },
       { id: 'experience', label: 'الخبرة' },

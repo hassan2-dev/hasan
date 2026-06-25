@@ -29,6 +29,7 @@ export function buildPortfolioData(lang = 'en') {
   return {
     personal: {
       ...personal,
+      name: t.name,
       location: t.location,
       cvUrl: '/Hassan adnan.pdf',
     },

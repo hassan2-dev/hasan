@@ -10,6 +10,7 @@ import AnimatedRole from './components/AnimatedRole'
 import ScrollIndicator from './components/ScrollIndicator'
 import ThemeLangToggle from './components/ThemeLangToggle'
 import { useApp } from './context/AppContext'
+import useWebMcp from './hooks/useWebMcp'
 
 const HIGHLIGHT_ICONS = {
   experience: Clock,
@@ -76,6 +77,8 @@ function App() {
   }
 
   const isRtl = lang === 'ar'
+
+  useWebMcp()
 
   return (
     <div className="theme-root min-h-screen overflow-x-hidden" data-theme={theme}>

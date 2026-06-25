@@ -1,0 +1,23 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://hasan-snowy.vercel.app/",
+      "service-doc": [
+        {
+          "href": "https://hasan-snowy.vercel.app/index.md",
+          "type": "text/markdown"
+        },
+        {
+          "href": "https://hasan-snowy.vercel.app/auth.md",
+          "type": "text/markdown"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://hasan-snowy.vercel.app/.well-known/agent-skills/index.json",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}

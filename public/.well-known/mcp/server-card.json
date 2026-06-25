@@ -1,0 +1,21 @@
+{
+  "serverInfo": {
+    "name": "Hassan Adnan Portfolio",
+    "version": "1.0.0",
+    "description": "Personal brand site for Hasan Adnan — CTO, software architect, and platform builder."
+  },
+  "transport": {
+    "type": "webmcp",
+    "endpoint": "https://hasan-snowy.vercel.app/"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "links": {
+    "homepage": "https://hasan-snowy.vercel.app/",
+    "contact": "https://hasan-snowy.vercel.app/#contact",
+    "cv": "https://hasan-snowy.vercel.app/Hassan%20adnan.pdf"
+  }
+}

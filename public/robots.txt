@@ -1,0 +1,36 @@
+# https://hasan-snowy.vercel.app/robots.txt
+# RFC 9309 — robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /assets/
+
+# AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# Content usage preferences (Content Signals)
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+Sitemap: https://hasan-snowy.vercel.app/sitemap.xml
